@@ -39,14 +39,17 @@ bool BowVocabulary::computeVocabulary(Mat& vocabularyOut, const string& vocabula
 		//#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < numberOfFiles; ++i) {
 			Mat imagePreprocessed;
-			string imageFilename = IMGS_DIRECTORY + fileNames[i] + IMAGE_TOKEN;
+			//string imageFilename = IMGS_DIRECTORY + fileNames[i] + IMAGE_TOKEN;
+			string imageFilename = "image/imgDB/" + fileNames[i] + DOT_JPG;
+			cout << "file " << imageFilename << endl;
 			if (_imagePreprocessor->loadAndPreprocessImage(imageFilename, imagePreprocessed, CV_LOAD_IMAGE_GRAYSCALE, false)) {
 				Mat outputImage;
 				if (outputAnalyzedImages) {
 					outputImage = imagePreprocessed.clone();
 				}
 
-				if (useOnlyTargetRegions) {
+				//if (useOnlyTargetRegions) {
+					if (0) {
 					vector<Mat> masks;
 					ImageUtils::retriveTargetsMasks(IMGS_DIRECTORY + fileNames[i], masks);
 					for (size_t maskIndex = 0; maskIndex < masks.size(); ++maskIndex) {
@@ -150,13 +153,32 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 		//#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < numberOfFiles; ++i) {
 			Mat imagePreprocessed;
-			string imageFilenameShort = IMGS_DIRECTORY + fileNames[i];
-			string imageFilenameFull = imageFilenameShort + IMAGE_TOKEN;
+			//string imageFilenameShort = IMGS_DIRECTORY + fileNames[i]; //image\imgDB
+			string imageFilenameShort = "image/imgDB/" + fileNames[i]; //image\imgDB
+			//string imageFilenameFull = imageFilenameShort + IMAGE_TOKEN;
+			string imageFilenameFull = imageFilenameShort + DOT_JPG;
+			cout << " iterative file " << imageFilenameFull << i << endl;
 			if (_imagePreprocessor->loadAndPreprocessImage(imageFilenameFull, imagePreprocessed, CV_LOAD_IMAGE_GRAYSCALE, false)) {
 				vector<KeyPoint> keypoints;				
 				_featureDetector->detect(imagePreprocessed, keypoints);
 
-				vector< vector <KeyPoint> > keypointsTargetClass;
+				//begin
+				Mat descriptorsTargetClass;						
+				_bowImgDescriptorExtractor->compute(imagePreprocessed, keypoints, descriptorsTargetClass);
+
+				//#pragma omp critical
+				if (descriptorsTargetClass.rows > 0 && descriptorsTargetClass.cols == samplesWordSize) {
+					trainSamples.push_back(descriptorsTargetClass);
+					if(i<40) {
+						trainLabels.push_back(1);
+					}else{
+						trainLabels.push_back(0);
+					}
+					
+				}
+
+				//end
+				/*vector< vector <KeyPoint> > keypointsTargetClass;
 				vector<KeyPoint> keypointsNonTargetClass;
 
 				ImageUtils::splitKeyPoints(imageFilenameShort, keypoints, keypointsTargetClass, keypointsNonTargetClass);
@@ -199,7 +221,7 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 					}
 
 					imwrite(imageOutputFilename.str(), imagePreprocessed);
-				}					
+				}	*/				
 			}
 		}
 		cout << "    -> Computed " << trainSamples.rows << " training samples from " << numberOfFiles << " images in " << performanceTimer.getElapsedTimeFormated() << "\n" << endl;

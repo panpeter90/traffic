@@ -5,8 +5,12 @@
 ImageDetectorSlidingWindow::ImageDetectorSlidingWindow(Ptr<ImageClassifier> imageClassifier) : ImageDetector(imageClassifier) {}
 ImageDetectorSlidingWindow::~ImageDetectorSlidingWindow() {}
 
-
 void ImageDetectorSlidingWindow::detectTargets(Mat& image, vector<Rect>& targetsBoundingRectanglesOut, Mat& votingMaskOut, Mat& scaledVotingMaskOut, bool showTargetBoundingRectangles, bool showImageKeyPoints, size_t* numberOfWindowsOut) {
+	float prediction = getImageClassifier()->analyzeImage(image);
+	cout << "Result label is " << prediction << endl;
+}
+
+/*void ImageDetectorSlidingWindow::detectTargets1(Mat& image, vector<Rect>& targetsBoundingRectanglesOut, Mat& votingMaskOut, Mat& scaledVotingMaskOut, bool showTargetBoundingRectangles, bool showImageKeyPoints, size_t* numberOfWindowsOut) {
 	cout << "    -> Detecting targets..." << endl;
 	PerformanceTimer performanceTimer;
 	performanceTimer.start();
@@ -72,13 +76,13 @@ void ImageDetectorSlidingWindow::detectTargets(Mat& image, vector<Rect>& targets
 	}
 
 
-	/*double minVote;
-	double maxVote;
-	cv::minMaxLoc(votingMask, &minVote, &maxVote);
-	double convertionScale = (double)maxVote / (double)(std::numeric_limits<unsigned char>::max)();*/
+	//double minVote;
+	//double maxVote;
+	//cv::minMaxLoc(votingMask, &minVote, &maxVote);
+	//double convertionScale = (double)maxVote / (double)(std::numeric_limits<unsigned char>::max)();
 
 	double convertionScale = (double)(std::numeric_limits<unsigned char>::max)() / (double)(numberOfWindows * GRAYSCALE_CONVERTION_MAX_NUMBER_WINDOWS_RATIO);
 	
 	votingMaskOut.convertTo(scaledVotingMaskOut, CV_8UC1, convertionScale);
-}
+}*/
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  <ImageDetectorSlidingWindow>  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -46,5 +46,8 @@
 
 #define FILENAME_SEPARATOR "__"
 
+//#define VOCABULARY_WORD_COUNT 1000
+
 #define VOCABULARY_WORD_COUNT 1000
+#define DOT_JPG ".jpg"
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  </constants definitions> <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
