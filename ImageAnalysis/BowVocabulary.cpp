@@ -40,7 +40,7 @@ bool BowVocabulary::computeVocabulary(Mat& vocabularyOut, const string& vocabula
 		for (int i = 0; i < numberOfFiles; ++i) {
 			Mat imagePreprocessed;
 			//string imageFilename = IMGS_DIRECTORY + fileNames[i] + IMAGE_TOKEN;
-			string imageFilename = "image/imgDB/" + fileNames[i] + DOT_JPG;
+			string imageFilename = "traffic/image/imgDB/" + fileNames[i] + DOT_JPG;
 			cout << "file " << imageFilename << endl;
 			if (_imagePreprocessor->loadAndPreprocessImage(imageFilename, imagePreprocessed, CV_LOAD_IMAGE_GRAYSCALE, false)) {
 				Mat outputImage;
@@ -154,7 +154,7 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 		for (int i = 0; i < numberOfFiles; ++i) {
 			Mat imagePreprocessed;
 			//string imageFilenameShort = IMGS_DIRECTORY + fileNames[i]; //image\imgDB
-			string imageFilenameShort = "image/imgDB/" + fileNames[i]; //image\imgDB
+			string imageFilenameShort = "traffic/image/imgDB/" + fileNames[i]; //image\imgDB
 			//string imageFilenameFull = imageFilenameShort + IMAGE_TOKEN;
 			string imageFilenameFull = imageFilenameShort + DOT_JPG;
 			cout << " iterative file " << imageFilenameFull << i << endl;
@@ -169,7 +169,7 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 				//#pragma omp critical
 				if (descriptorsTargetClass.rows > 0 && descriptorsTargetClass.cols == samplesWordSize) {
 					trainSamples.push_back(descriptorsTargetClass);
-					if(i<40) {
+					if(i<41) {
 						trainLabels.push_back(1);
 					}else{
 						trainLabels.push_back(0);

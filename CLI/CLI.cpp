@@ -199,7 +199,7 @@ void CLI::setupTraining() {
 	}
 
 	//_imageClassifier->trainClassifier(VOCABULARY_IMAGES_LIST, CLASSIFIER_IMGAGES_LIST);
-	_imageClassifier->trainClassifier("image/listcar.txt", "image/listcartrain.txt");
+	_imageClassifier->trainClassifier("traffic/image/listcar.txt", "traffic/image/listcartrain.txt");
 
 	_imageDetector = new ImageDetectorSlidingWindow(_imageClassifier);
 }

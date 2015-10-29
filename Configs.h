@@ -33,9 +33,9 @@
 #define CLASSIFIER_IMGAGES_LIST "imgs/listBuildSamples.txt"
 #define TEST_IMGAGES_LIST "imgs/listTest.txt"
 
-#define TRAINING_DIRECTORY "training/"
-#define VOCABULARY_BUILD_OUTPUT_DIRECTORY "training/vocabularyBuildOutput/"
-#define SAMPLES_BUILD_OUTPUT_DIRECTORY "training/samplesBuildOutput/"
+#define TRAINING_DIRECTORY "traffic/training/"
+#define VOCABULARY_BUILD_OUTPUT_DIRECTORY "traffic/training/vocabularyBuildOutput/"
+#define SAMPLES_BUILD_OUTPUT_DIRECTORY "traffic/training/samplesBuildOutput/"
 #define TEST_OUTPUT_DIRECTORY "testResults/"
 
 #define TARGET_DETECTIONS_RECTANGLE_COLOR Scalar(45,255,255)
