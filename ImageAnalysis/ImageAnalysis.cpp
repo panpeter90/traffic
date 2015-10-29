@@ -45,6 +45,7 @@ bool ImageAnalysis::processImage(string path, bool useCVHighGUI) {
 
 	bool status = processImage(imageToProcess, useCVHighGUI);	
 	
+	return status;
 	while(waitKey(10) != ESC_KEYCODE) {}
 	
 	if (useCVHighGUI) {
@@ -59,14 +60,15 @@ bool ImageAnalysis::processImage(Mat& image, bool useCVHighGUI) {
 	_originalImage = image.clone();	
 	_useCVHiGUI = useCVHighGUI;
 	
-	if (useCVHighGUI) {		
+	//if (useCVHighGUI) {	
+	if (0) {	
 		if (!_windowsInitialized) {
 			setupMainWindow();
 			setupResultsWindows(_optionsOneWindow);
 			_windowsInitialized = true;
 		}
 
-		imshow(WINDOW_NAME_MAIN, _originalImage);
+		//imshow(WINDOW_NAME_MAIN, _originalImage);
 	}
 
 	_preprocessedImage = image.clone();
@@ -79,8 +81,8 @@ bool ImageAnalysis::processImage(Mat& image, bool useCVHighGUI) {
 	Mat votingMask;
 	Mat votingMaskScaled;
 	_imageDetector->detectTargets(_processedImage, targetsBoundingRectanglesOut, votingMask, votingMaskScaled, true, true);
-	imshow(WINDOW_NAME_TARGET_DETECTION, _processedImage);
-	imshow(WINDOW_NAME_TARGET_DETECTION_VOTER_MASK, votingMaskScaled);
+	//imshow(WINDOW_NAME_TARGET_DETECTION, _processedImage);
+	//imshow(WINDOW_NAME_TARGET_DETECTION_VOTER_MASK, votingMaskScaled);
 
 	return true;
 }

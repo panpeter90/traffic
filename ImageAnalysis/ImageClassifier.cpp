@@ -69,6 +69,7 @@ bool ImageClassifier::loadClassifier() {
 	}
 
 	stringstream classifierFilenameFull;
+	//classifierFilenameFull << "traffic/training/Classifier_SIFT-Detector_SIFT-Extractor_BF-Matcher_KMeans-BowTrainer_SVM-Classifier.xml";
 	classifierFilenameFull << TRAINING_DIRECTORY << _classifierFilename + CLASSIFIER_EXTENSION;
 	FileStorage fs(classifierFilenameFull.str(), FileStorage::READ);
 	if (fs.isOpened()) {		

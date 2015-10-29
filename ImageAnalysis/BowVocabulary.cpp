@@ -171,8 +171,10 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 					trainSamples.push_back(descriptorsTargetClass);
 					if(i<41) {
 						trainLabels.push_back(1);
+					}else if(i<81){
+						trainLabels.push_back(2);
 					}else{
-						trainLabels.push_back(0);
+						trainLabels.push_back(3);
 					}
 					
 				}
@@ -245,6 +247,7 @@ bool BowVocabulary::computeTrainingData(TrainingData& trainingDataOut, const str
 
 bool BowVocabulary::loadVocabulary(Mat& vocabularyOut) {
 	stringstream filename;
+	//filename << "traffic/training/Vocabulary_SIFT-Detector_SIFT-Extractor_BF-Matcher_KMeans-BowTrainer.xml";
 	filename << TRAINING_DIRECTORY << _vocabularyFilename << VOCABULARY_EXTENSION;
 	if (ImageUtils::loadMatrix(filename.str(), VOCABULARY_TAG, vocabularyOut)) {
 		cout << "    -> Loaded vocabulary from " << filename.str() << endl;

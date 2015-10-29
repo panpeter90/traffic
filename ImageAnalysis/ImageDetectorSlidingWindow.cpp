@@ -6,8 +6,13 @@ ImageDetectorSlidingWindow::ImageDetectorSlidingWindow(Ptr<ImageClassifier> imag
 ImageDetectorSlidingWindow::~ImageDetectorSlidingWindow() {}
 
 void ImageDetectorSlidingWindow::detectTargets(Mat& image, vector<Rect>& targetsBoundingRectanglesOut, Mat& votingMaskOut, Mat& scaledVotingMaskOut, bool showTargetBoundingRectangles, bool showImageKeyPoints, size_t* numberOfWindowsOut) {
+	cout << "    -> Detecting targets..." << endl;
+	PerformanceTimer performanceTimer;
+	performanceTimer.start();
 	float prediction = getImageClassifier()->analyzeImage(image);
 	cout << "Result label is " << prediction << endl;
+	cout << "    -> Detected " << " targets in " << performanceTimer.getElapsedTimeFormated()  << endl;
+
 }
 
 /*void ImageDetectorSlidingWindow::detectTargets1(Mat& image, vector<Rect>& targetsBoundingRectanglesOut, Mat& votingMaskOut, Mat& scaledVotingMaskOut, bool showTargetBoundingRectangles, bool showImageKeyPoints, size_t* numberOfWindowsOut) {

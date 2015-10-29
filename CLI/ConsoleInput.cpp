@@ -20,7 +20,7 @@ string ConsoleInput::getLineCin() {
 
 
 void ConsoleInput::clearConsoleScreen() {
-	for (size_t i = 0; i < 80; ++i) {
+	for (size_t i = 0; i < 2; ++i) { //80
 		cout << "\n";
 	}
 	
